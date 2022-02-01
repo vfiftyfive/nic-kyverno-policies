@@ -1,0 +1,18 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-replicas
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: check-for-replicas
+    match:
+      resources:
+        kinds:
+        - StorageClass
+        name: "ondat-replicated"
+    validate:
+      message: "Number of replicas must be greater or equal to 1"
+      pattern:
+        parameters:
+          storageos.com/replicas: ">=1"

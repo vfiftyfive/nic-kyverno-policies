@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-pvc-volume-size
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: check-for-pvc-volume-size
+    match:
+      resources:
+        kinds:
+        - MongoDBCommunity
+    validate:
+      message: "PVC size must be less than or equal to 10Gi"
+      pattern:
+        spec:
+          statefulSet:
+            spec:
+              volumeClaimTemplates:
+              - spec:
+                  resources:
+                    requests:
+                      storage: "<=10Gi"

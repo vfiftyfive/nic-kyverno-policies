@@ -1,0 +1,18 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-encryption
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: check-for-encryption
+    match:
+      resources:
+        kinds:
+        - StorageClass
+        name: "*ondat*"
+    validate:
+      message: "Ondat encryption must be enabled"
+      pattern:
+        parameters:
+          storageos.com/encryption: "true"
