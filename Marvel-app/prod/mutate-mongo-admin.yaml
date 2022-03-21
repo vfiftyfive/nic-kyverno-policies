@@ -11,14 +11,15 @@ spec:
             kinds:
             - MongoDBCommunity
       mutate:
-        patchStrategicMerge:
-          spec:
-          users:
-          - name: admin
-            roles:
-            - name: dbAdminAnyDatabase
-              db: admin
-            - name: userAdminAnyDatabase
-              db: admin
-            - name: clusterAdmin
-              db: admin
+        patchesJson6902: |-
+          - path: "/spec/users"
+            op: add
+            value:
+            - name: admin
+              roles:
+              - name: dbAdminAnyDatabase
+                db: admin
+              - name: userAdminAnyDatabase
+                db: admin
+              - name: clusterAdmin
+                db: admin
