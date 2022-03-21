@@ -10,13 +10,16 @@ spec:
         - resources:
             kinds:
             - MongoDBCommunity
+      preconditions:
+        all:
+        - key: "{{ request.object.spec.users[0].name }}"
+          operator: Equals
+          value: "admin"
       mutate:
         patchesJson6902: |-
-          - path: "/spec/users"
+          - path: "/spec/users/0/roles"
             op: add
             value:
-            - name: admin
-              roles:
               - name: dbAdminAnyDatabase
                 db: admin
               - name: userAdminAnyDatabase
