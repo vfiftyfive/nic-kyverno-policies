@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: set-volume-size
+spec:
+  rules:
+    - name: set-volume-size
+      match:
+        any:
+        - resources:
+            kinds:
+            - MongoDBCommunity
+      mutate:
+        patchStrategicMerge:
+          spec:
+          statefulSet:
+            spec:
+              volumeClaimTemplates:
+              - spec:
+                  resources:
+                    requests:
+                      storage: "7Gi"
