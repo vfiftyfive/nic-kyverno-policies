@@ -13,10 +13,10 @@ spec:
       mutate:
         patchStrategicMerge:
           spec:
-          statefulSet:
-            spec:
-              volumeClaimTemplates:
-              - spec:
-                  resources:
-                    requests:
-                      storage: "7Gi"
+            statefulSet:
+              spec:
+                volumeClaimTemplates:
+                - spec:
+                    resources:
+                      requests:
+                        storage: "7Gi"
