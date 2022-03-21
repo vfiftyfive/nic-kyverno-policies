@@ -1,10 +1,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: set-volume-size
+  name: set-mongo-admin
 spec:
   rules:
-    - name: set-volume-size
+    - name: set-mongo-admin
       match:
         any:
         - resources:
