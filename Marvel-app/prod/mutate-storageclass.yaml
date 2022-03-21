@@ -16,3 +16,6 @@ spec:
           parameters:
             storageos.com/replicas: "2"
             storageos.com/encryption: "true"
+            csi.storage.k8s.io/fstype: xfs
+            csi.storage.k8s.io/secret-name: storageos-api
+            csi.storage.k8s.io/secret-namespace: storageos
