@@ -10,7 +10,7 @@ spec:
       resources:
         kinds:
         - StorageClass
-        name: "*ondat*"
+        name: "ondat-prod"
     validate:
       message: "Ondat encryption must be enabled"
       pattern:

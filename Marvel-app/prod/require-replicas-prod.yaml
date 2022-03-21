@@ -10,9 +10,9 @@ spec:
       resources:
         kinds:
         - StorageClass
-        name: "ondat-replicated"
+        name: "ondat-prod"
     validate:
-      message: "Number of replicas must be greater or equal to 3"
+      message: "The number of replicas must be greater or equal to 2"
       pattern:
         parameters:
-          storageos.com/replicas: ">=3"
+          storageos.com/replicas: ">=2"
