@@ -12,17 +12,21 @@ spec:
             - MongoDBCommunity
       preconditions:
         all:
-        - key: "{{ request.object.spec.users[0].name }}"
-          operator: Equals
+        - key: "{{ request.object.spec.users[*].name }}"
+          operator: In
           value: "admin"
       mutate:
-        patchesJson6902: |-
-          - path: "/spec/users/0/roles"
-            op: add
-            value:
-              - name: dbAdminAnyDatabase
-                db: admin
-              - name: userAdminAnyDatabase
-                db: admin
-              - name: clusterAdmin
-                db: admin
+        foreach:
+        - list: "request.object.spec.users"
+          patchesJson6902: |-
+            - path: "/spec/users/{{elementIndex}}/roles"
+              op: add
+              value:
+                - name: dbAdminAnyDatabase
+                  db: admin
+                - name: userAdminAnyDatabase
+                  db: admin
+                - name: clusterAdmin
+                  db: admin
+                - name: readWriteAnyDatabase
+                  db: admin
